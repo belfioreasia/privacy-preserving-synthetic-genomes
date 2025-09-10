@@ -1,0 +1,9 @@
+##fileformat=VCFv4.1
+##fileDate=20250830
+##source=Benchmark Data
+##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of Samples With Data">
+##INFO=<ID=AC,Number=1,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele frequency for each ALT allele in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	synth_1	synth_2	synth_3	synth_4	synth_5	synth_6	synth_7	synth_8	synth_9	synth_10	synth_11	synth_12	synth_13	synth_14	synth_15	synth_16	synth_17	synth_18	synth_19	synth_20	synth_21	synth_22	synth_23	synth_24	synth_25	synth_26	synth_27	synth_28	synth_29	synth_30	synth_31	synth_32	synth_33	synth_34	synth_35	synth_36	synth_37	synth_38	synth_39	synth_40	synth_41	synth_42	synth_43	synth_44	synth_45	synth_46	synth_47	synth_48	synth_49	synth_50	synth_51	synth_52	synth_53	synth_54	synth_55	synth_56	synth_57	synth_58	synth_59	synth_60	synth_61	synth_62	synth_63	synth_64	synth_65	synth_66	synth_67	synth_68	synth_69	synth_70	synth_71	synth_72	synth_73	synth_74	synth_75	synth_76	synth_77	synth_78	synth_79	synth_80	synth_81	synth_82	synth_83	synth_84	synth_85	synth_86	synth_87	synth_88	synth_89	synth_90	synth_91	synth_92	synth_93	synth_94	synth_95	synth_96	synth_97	synth_98	synth_99	synth_100

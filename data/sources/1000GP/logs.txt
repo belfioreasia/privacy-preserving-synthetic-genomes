@@ -1,0 +1,74 @@
+Processed 1000 mutations for 830 samples.
+Saved 830 samples with 830 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr4.json.
+Processing chromosome 5...
+Processing VCF records: 5069207it [04:10, 20256.07it/s]         
+Processed 1000 mutations for 844 samples.
+Saved 844 samples with 844 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr5.json.
+Processing chromosome 6...
+Processing VCF records: 4832674it [04:00, 20082.82it/s]                     
+Processed 1000 mutations for 851 samples.
+Saved 851 samples with 851 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr6.json.
+Processing chromosome 7...
+Processing VCF records: 4691977it [03:50, 20335.01it/s]         
+Processed 1000 mutations for 819 samples.
+Saved 819 samples with 819 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr7.json.
+Processing chromosome 8...
+Processing VCF records: 4588755it [03:45, 20312.25it/s]                     
+Processed 1000 mutations for 839 samples.
+Saved 839 samples with 839 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr8.json.
+Processing chromosome 9...
+Processing VCF records: 3548896it [02:54, 20335.62it/s]                     
+Processed 1000 mutations for 838 samples.
+Saved 838 samples with 838 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr9.json.
+Processing chromosome 10...
+Processing VCF records: 3985351it [03:24, 19506.22it/s]         
+Processed 1000 mutations for 820 samples.
+Saved 820 samples with 820 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr10.json.
+Processing chromosome 11...
+Processing VCF records: 4038232it [03:21, 20086.76it/s]                 
+Processed 1000 mutations for 814 samples.
+Saved 814 samples with 814 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr11.json.
+Processing chromosome 12...
+Processing VCF records: 3844163it [03:10, 20185.85it/s]         
+Processed 1000 mutations for 836 samples.
+Saved 836 samples with 836 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr12.json.
+Processing chromosome 13...
+Processing VCF records: 2850948it [02:22, 20074.29it/s]         
+Processed 1000 mutations for 830 samples.
+Saved 830 samples with 830 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr13.json.
+Processing chromosome 14...
+Processing VCF records: 2644841it [02:12, 20031.62it/s]         
+Processed 1000 mutations for 821 samples.
+Saved 821 samples with 821 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr14.json.
+Processing chromosome 15...
+Processing VCF records: 2409490it [02:00, 19954.40it/s]                     
+Processed 1000 mutations for 828 samples.
+Saved 828 samples with 828 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr15.json.
+Processing chromosome 16...
+Processing VCF records: 2682998it [02:11, 20409.93it/s]                     
+Processed 1000 mutations for 826 samples.
+Saved 826 samples with 826 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr16.json.
+Processing chromosome 17...
+Processing VCF records: 2325643it [01:57, 19860.10it/s]                     
+Processed 1000 mutations for 804 samples.
+Saved 804 samples with 804 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr17.json.
+Processing chromosome 18...
+Processing VCF records: 2264472it [01:53, 19959.14it/s]         
+Processed 1000 mutations for 814 samples.
+Saved 814 samples with 814 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr18.json.
+Processing chromosome 19...
+Processing VCF records: 1830196it [01:32, 19784.29it/s]         
+Processed 1000 mutations for 813 samples.
+Saved 813 samples with 813 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr19.json.
+Processing chromosome 20...
+Processing VCF records: 1805981it [01:29, 20231.18it/s]         
+Processed 1000 mutations for 825 samples.
+Saved 825 samples with 825 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr20.json.
+Processing chromosome 21...
+Processing VCF records: 1102931it [00:56, 19619.63it/s]                     
+Processed 1000 mutations for 836 samples.
+Saved 836 samples with 836 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr21.json.
+Processing chromosome 22...
+Processing VCF records: 1093019it [00:56, 19512.25it/s]         
+Processed 1000 mutations for 824 samples.
+Saved 824 samples with 824 mutations at /Volumes/asia_2T/genomics/reference/1000GP/corpus/corpus_chr22.json.

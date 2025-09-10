@@ -1,0 +1,35 @@
+{
+  "additional_special_tokens": [
+    "<START_SAMPLE>",
+    "<END_SAMPLE>",
+    "<MUT_SEP>",
+    "<START_ID>",
+    "<END_ID>",
+    "<START_POP>",
+    "<END_POP>",
+    "<PAD>",
+    "<UNK>"
+  ],
+  "bos_token": {
+    "content": "<|endoftext|>",
+    "lstrip": false,
+    "normalized": true,
+    "rstrip": false,
+    "single_word": false
+  },
+  "eos_token": {
+    "content": "<|endoftext|>",
+    "lstrip": false,
+    "normalized": true,
+    "rstrip": false,
+    "single_word": false
+  },
+  "pad_token": "<|endoftext|>",
+  "unk_token": {
+    "content": "<|endoftext|>",
+    "lstrip": false,
+    "normalized": true,
+    "rstrip": false,
+    "single_word": false
+  }
+}
