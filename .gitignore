@@ -5,34 +5,24 @@ pyvenv.cfg
 
 # virtual environment files 
 **venv**
-code/venv
-code/tf_venv
+venv
+tf_venv
 
 # ignore big data files
-code/data/sources/test/input_files.vcf.gz
-code/data/sources/test/input_files.vcf.gz.tbi
-code/data/sources/test/splink_toy_dataset.zip
-code/data/sources/test/tiny-genomic-data.zip
+data/sources/test/input_files.vcf.gz
+data/sources/test/input_files.vcf.gz.tbi
+data/sources/test/splink_toy_dataset.zip
+data/sources/test/tiny-genomic-data.zip
 
-**code/data/sources/*corpus*
-code/data/sources/json/medium
-code/data/sources/json/large
+**data/sources/*corpus*
+data/sources/json/medium
+data/sources/json/large
 
-code/data/sources/1000GP/utility_eval.json
+data/sources/1000GP/utility_eval.json
+# large-pre-computed evals
 **utility_eval.json
-
 
 **checkpoints**
 *.safetensors
 *.pth
 *.bin
-
-code/models/saved/old_GPT
-code/models/saved/minGPT
-/old_DP
-# notes + private files
-*paperspace*
-Report/README.md
-Resources/
-code/data/README.md
-Report/MSc_Thesis_Updates.pdf

@@ -20,6 +20,25 @@ def generate_sample(model, tokenizer, formatter, prompt=None, max_sample_length=
                     samples_to_generate=1, skip_special_tokens=False, custom=False,
                     temperature=0.8, return_tensors=False, **kwargs):
     """
+    Generate synthetic samples from a (finetuned) GPT-2 model.
+    If no prompt is provided, a random sample with 1 mutation is generated.
+    Args:
+        model: GPT-2 model (finetuned or pretrained)
+        tokenizer: GPT-2 tokenizer
+        formatter: Formatter object to format input/output strings
+        prompt (optional): input prompt string to condition generation
+        max_sample_length: maximum number of tokens to generate for each sample
+                            (Defaults to 500)
+        samples_to_generate: number of samples to generate (Defaults to 1)
+        skip_special_tokens: whether to skip special tokens in the output
+                            (Defaults to False)
+        custom: whether to convert output to custom format (Defaults to False)
+        temperature: sampling temperature (Defaults to 0.8)
+        return_tensors: whether to return raw token tensors (Defaults to False)
+        **kwargs: additional arguments
+
+    Returns:
+        list: generated samples as strings or tensor token ids
     """
     GPT_SPECIAL_TOKENS = {'start_sample': '<START_SAMPLE>',
                     'end_sample': '<END_SAMPLE>',
@@ -90,6 +109,8 @@ def generate_sample(model, tokenizer, formatter, prompt=None, max_sample_length=
 ############################# Finetuning HF GPT-2 #############################
 class FinetuningTrainer:
     """
+    Class to handle finetuning of GPT-2 from pretrained Transformer
+    model using Hugging Face Trainer API.
     """
     def __init__(self, output_dir="models/saved/GPT",
                 model_name='gpt2',
@@ -118,6 +139,8 @@ class FinetuningTrainer:
 
     def setup_tokenizer_and_model(self):
         """
+        Load GPT-2 tokenizer and model from pretrained Transformer.
+        Add special tokens to tokenizer and resize model embeddings.
         """
         self.tokenizer = GPT2Tokenizer.from_pretrained(self.model_name, gradient_checkpointing=True)
         
@@ -141,6 +164,18 @@ class FinetuningTrainer:
 
     def setup_training_data(self, dataset, train_val_split=0.3,
                             max_length=1000):
+        """
+        Prepare training and evaluation datasets.
+
+        Args:
+            dataset: list of input sequences (strings)
+            train_val_split: ratio of data to use for validation (Defaults to 0.3)
+            max_length: maximum sequence length for tokenization (Defaults to 1000)
+
+        Returns:
+            train_dataset: training dataset FinetunedGPTDataset object
+            eval_dataset: evaluation dataset FinetunedGPTDataset object
+        """
         # Create split datasets
         train_sequences, val_sequences = train_test_split(
                                         dataset, 
@@ -157,6 +192,19 @@ class FinetuningTrainer:
     def setup_trainer(self, epochs=5, train_batch_size=4, eval_batch_size=4,
                             learning_rate=5e-5, weight_decay=0.01):
         """
+        Setup training arguments for Hugging Face or dp-transformers Trainer.
+        Handles both standard and differentially private training.
+
+        Args:
+            epochs: number of training epochs (Defaults to 5)
+            train_batch_size: training batch size (Defaults to 4)
+            eval_batch_size: evaluation batch size (Defaults to 4)
+            learning_rate: learning rate (Defaults to 5e-5)
+            weight_decay: weight decay (Defaults to 0.01)
+
+        Returns:
+            training_args: TrainingArguments or dp_transformers.TrainingArguments
+                         object
         """ 
         # Set training args
         if self.use_privacy:
@@ -202,6 +250,9 @@ class FinetuningTrainer:
         return training_args
     
     def setup_differential_privacy(self):
+        """
+        Setup differential privacy arguments and data collator for dp-transformers Trainer.
+        """
         import dp_transformers    
         print("Setting up differential privacy...", end='') 
 
@@ -219,7 +270,16 @@ class FinetuningTrainer:
     
     def train_model(self, train_dataset, eval_dataset, training_args):
         """
-        """                     
+        Train the model with the given datasets and training arguments.
+
+        Args:
+            train_dataset: training dataset FinetunedGPTDataset object
+            eval_dataset: evaluation dataset FinetunedGPTDataset object
+            training_args: TrainingArguments or dp_transformers.TrainingArguments
+
+        Returns:
+            trainer: trained Trainer or dp_transformers.OpacusDPTrainer object
+        """
         if self.use_privacy:
             import dp_transformers
             # from dp_transformers.grad_sample.transformers import conv_1d
@@ -274,6 +334,10 @@ class FinetuningTrainer:
     
     def evaluate_model(self, trainer):
         """
+        Evaluate the trained model using the trainer's evaluate method.
+
+        Args:
+            trainer: trained Trainer or dp_transformers.OpacusDPTrainer object
         """
         print("Evaluating model...", end='')
         eval_results = trainer.evaluate()
@@ -289,6 +353,10 @@ from transformers import AutoTokenizer, pipeline
 import json
 
 class PretrainedGPT:
+    """
+    Class to handle text generation from pretrained benchmarking GPT-2 model
+    using Hugging Face pipeline API.
+    """
     def __init__(self, model_name='gpt2', **kwargs):
         self.device = kwargs.get('device', 'cuda' if torch.cuda.is_available() else 'cpu')
         self.model_name = model_name

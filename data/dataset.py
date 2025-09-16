@@ -15,6 +15,7 @@ GPT_SPECIAL_TOKENS = {'start_sample': '<START_SAMPLE>',
 
 class GPTDataFormatter:
     """
+    Formatter class for GPT/minGPT training data.
     """
     def __init__(self, special_tokens=GPT_SPECIAL_TOKENS, custom=False):
         self.special_tokens = special_tokens
@@ -22,6 +23,13 @@ class GPTDataFormatter:
 
     def load_data_from_json(self, json_file_path):
         """
+        Load data from a JSON file.
+
+        Args:
+            json_file_path (str): Path to the JSON file.
+
+        Returns:
+            dict: Loaded data.
         """
         with open(json_file_path, 'r') as f:
             data = json.load(f)
@@ -31,6 +39,13 @@ class GPTDataFormatter:
         """
         Extract info from a single mutation in the format 
         "chr:pos:ref>alt_gt"
+
+        Args:
+            mutation_str (str): Input single mutation.
+        
+        Returns:
+            dict: Dictionary with mutation info. Contains keys:
+                    'chrom', 'pos', 'ref', 'alt', 'gt'.
         """
         chrom, pos, alleles = mutation_str.split(':')
         alleles, gt = alleles.split('_')
@@ -44,6 +59,14 @@ class GPTDataFormatter:
     
     def mut_dict_to_str(self, mutation_dict):
         """
+        Convert mutation dictionary to string format for model training.
+
+        Args:
+            mutation_dict (dict): Dictionary with mutation info. Contains keys:
+                                  'chrom', 'pos', 'ref', 'alt', 'gt'.
+        
+        Returns:
+            str: Formatted mutation string.
         """
         mut_str = f"{mutation_dict['chrom']}:{mutation_dict['pos']}:" \
                     f"{mutation_dict['ref']}>{mutation_dict['alt']}_{mutation_dict['gt']}"
@@ -51,6 +74,15 @@ class GPTDataFormatter:
     
     def mut_str_to_custom(self, generated_mutations):
         """
+        Convert generated mutations string to custom format. Remves special tokens
+        and incomplete mutations.
+
+        Args:
+            generated_mutations (str): Model-generated mutations profile as a
+                                        sequence of concatenated mutations.  
+
+        Returns:
+            str: Custom formatted mutations profile string.
         """
         # remove tokenizer special tokens
         generated_mutations = generated_mutations.strip(self.special_tokens['start_sample'])
@@ -73,6 +105,16 @@ class GPTDataFormatter:
 
     def format_sample(self, genotypes, sample_id=None, pop_code=None, pad=None):
         """
+        Format a single sample's genotype profile for model training.
+
+        Args:
+            genotypes (list): List of sample mutations.
+            sample_id (str, optional): Sample ID (Defaults to None).
+            pop_code (str, optional): Population code (Defaults to None).
+            pad (int, optional): Number of padding tokens to add (Defaults to None).
+
+        Returns:
+            str: Formatted sample string.
         """
         assert genotypes is not None, "Empty genotypes passed."
 
@@ -103,6 +145,19 @@ class GPTDataFormatter:
     def get_training_corpus(self, data, max_sample_muts=1000,
                             include_pop=False, include_id=False):
         """
+        Format the entire dataset for model training in a sample-wise manner.
+
+        Args:
+            data (dict): Dictionary with sample genotypes.
+            max_sample_muts (int, optional): Max number of mutations per sample
+                                             (Defaults to 1000).
+            include_pop (bool, optional): Whether to include population codes
+                                          (Defaults to False).
+            include_id (bool, optional): Whether to include sample IDs
+                                         (Defaults to False).
+
+        Returns:
+            list: List of formatted sample profiles as srtrings.
         """
         formatted_samples = []
         
@@ -124,7 +179,16 @@ class GPTDataFormatter:
     
     def format_prompt(self, prompt, sample_id, pop_code):
         """
-        Assume prompt is in the form "chr:pos:ref>alt_gt chr:pos:..."
+        Format a prompt for model inference. Assumes prompt is in the form
+        "chr:pos:ref>alt_gt chr:pos:..."
+
+        Args:
+            prompt (str): Input prompt string.
+            sample_id (str): Sample ID.
+            pop_code (str): Population code.
+
+        Returns:
+            str: Formatted prompt string.
         """
         prompt = prompt.split(' ')
         formatted_prompt = self.format_sample(prompt, sample_id, pop_code, pad=None)
@@ -135,7 +199,8 @@ class GPTDataFormatter:
 ########################### Data utils for MinGPT ###########################
 class MinGPTDataset(Dataset):
     """
-    For Causal Language Modelling
+    Custom Genetic Mutation Dataset handler for Causal Language Modelling
+    for minGPT training.
     """
     
     def __init__(self, sequences, tokenizer, max_length=4634):
@@ -176,7 +241,8 @@ class MinGPTDataset(Dataset):
 ############################# Data utils GPT-2 #############################
 class FinetunedGPTDataset(Dataset):
     """
-    For Causal Language Modelling
+    Custom Genetic Mutation Dataset handler for Causal Language Modelling
+    for GPT-2 finetuning.
     """
     
     def __init__(self, sequences, tokenizer, max_length=1024):

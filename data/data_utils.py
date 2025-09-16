@@ -13,13 +13,13 @@ import warnings
 
 
 ############################# GENERAL UTILS #############################
-def set_seed(seed: int):
+def set_seed(seed):
     """
     Helper function for reproducible behavior to set the seed in ``random``, ``numpy``, ``torch`` and/or ``tf`` (if
     installed).
 
     Args:
-        seed (:obj:`int`): The seed to set.
+        seed (int): The seed to set.
     """
     random.seed(seed)
     np.random.seed(seed)
@@ -1020,6 +1020,14 @@ def corpus_to_VCF(corpus, imputation_method, save_path=None, **kwargs):
 ############################# RANDOM GENERATION #############################
 def generate_random_deletion(main_sequence, num_of_bp_to_delete):
     """
+    Generate random allele deletion(s) in a nucleobase sequence.
+
+    Args:
+        main_sequence (str): The original nucleobase sequence.
+        num_of_bp_to_delete (int): The number of base pairs to delete.
+
+    Returns:
+        str: The modified nucleobase sequence with deletions.
     """
     idx = []
     for i in range(num_of_bp_to_delete):
@@ -1032,6 +1040,14 @@ def generate_random_deletion(main_sequence, num_of_bp_to_delete):
 
 def generate_random_insertion(main_sequence, num_of_bp_to_add):
     """
+    Generate random allele insertion(s) in a nucleobase sequence.
+
+    Args:
+        main_sequence (str): The original nucleobase sequence.
+        num_of_bp_to_add (int): The number of base pairs to insert.
+
+    Returns:
+        str: The modified nucleobase sequence with insertions.
     """
     idx = []
     nucleobases = ['A', 'C', 'G', 'T']
@@ -1045,6 +1061,14 @@ def generate_random_insertion(main_sequence, num_of_bp_to_add):
 
 def generate_random_substitution(main_sequence, num_of_bp_to_change):
     """
+    Generate random allele substitution(s) in a nucleobase sequence.
+
+    Args:
+        main_sequence (str): The original nucleobase sequence.
+        num_of_bp_to_change (int): The number of base pairs to substitute.
+
+    Returns:
+        str: The modified nucleobase sequence with substitutions.
     """
     nucleobases = ['A', 'C', 'G', 'T']
     idx = [random.randrange(0, len(main_sequence)) for _ in range(num_of_bp_to_change)]
@@ -1054,21 +1078,28 @@ def generate_random_substitution(main_sequence, num_of_bp_to_change):
     return main_sequence
 
 def get_decreasing_probabilities(max_range):
-        """
-        """
-        probabilities = [1/(idx+1) for idx in range(max_range-1)]
-        prob_weights = sum(probabilities)
-        probabilities = [w/(prob_weights**i+1) for i, w in enumerate(probabilities)]
-        s = sum(probabilities)
-        added = False
-        for i in range(len(probabilities)):
-            if probabilities[i] < 1-s:
-                probabilities.insert(i, 1-s)
-                added = True
-                break
-        if not added:
-            probabilities.append(1-s)
-        return probabilities
+    """
+    Get a list of decreasing probabilities for a given range.
+
+    Args:
+        max_range (int): The maximum range for which to generate probabilities. 
+        
+    Returns:
+        list: A list of decreasing probabilities that sum to 1.
+    """
+    probabilities = [1/(idx+1) for idx in range(max_range-1)]
+    prob_weights = sum(probabilities)
+    probabilities = [w/(prob_weights**i+1) for i, w in enumerate(probabilities)]
+    s = sum(probabilities)
+    added = False
+    for i in range(len(probabilities)):
+        if probabilities[i] < 1-s:
+            probabilities.insert(i, 1-s)
+            added = True
+            break
+    if not added:
+        probabilities.append(1-s)
+    return probabilities
 
 def generate_random_vcf(num_samples=100, num_mutations=100, max_nucleobase_seq_length=29,
                         mutation_types=['deletion', 'insertion', 'substitution'], save_path=None,
